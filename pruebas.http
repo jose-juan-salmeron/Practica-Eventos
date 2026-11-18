@@ -1,0 +1,113 @@
+### Variables
+@baseUrl = http://localhost:8080
+
+### =============================================
+### RECINTOS
+### =============================================
+
+### 1. POST /recintos - Crear un recinto
+POST {{baseUrl}}/recintos
+content-type: application/json
+
+{
+    "nombre": "Palacio de Deportes",
+    "direccion": "Calle Mayor 123, Madrid",
+    "localidad": "Madrid",
+    "aforoMaximo": 15000
+}
+
+### 2. POST /recintos - Crear otro recinto
+POST {{baseUrl}}/recintos
+content-type: application/json
+
+{
+    "nombre": "Teatro Principal",
+    "direccion": "Avenida de la Constitución 45, Valencia",
+    "localidad": "Valencia",
+    "aforoMaximo": 2000
+}
+
+### 3. GET /recintos - Listar todos los recintos
+GET {{baseUrl}}/recintos
+
+### 4. GET /recintos/:id - Buscar recinto por id (cambiar el id)
+GET {{baseUrl}}/recintos/6745a1b2c3d4e5f6a7b8c9d0
+
+### 5. GET /recintos/:id - Buscar recinto con id inválido
+GET {{baseUrl}}/recintos/idInvalido
+
+### 6. GET /recintos/localidad/:nombre - Buscar recintos por localidad
+GET {{baseUrl}}/recintos/localidad/Madrid
+
+### 7. GET /recintos/localidad/:nombre - Localidad sin recintos
+GET {{baseUrl}}/recintos/localidad/Inexistente
+
+### 8. DELETE /recintos/:id - Eliminar un recinto (cambiar el id)
+DELETE {{baseUrl}}/recintos/6745a1b2c3d4e5f6a7b8c9d0
+
+### 9. POST /recintos - Error de validación (nombre demasiado corto)
+POST {{baseUrl}}/recintos
+content-type: application/json
+
+{
+    "nombre": "Pal",
+    "direccion": "Calle Mayor 123, Madrid",
+    "localidad": "Madrid"
+}
+
+### =============================================
+### EVENTOS
+### =============================================
+
+### 10. POST /eventos - Crear un evento (cambiar el id del recinto)
+POST {{baseUrl}}/eventos
+content-type: application/json
+
+{
+    "nombre": "Concierto de Rock",
+    "fecha": "2027-06-15T20:00:00.000Z",
+    "entradas": [
+        { "tipo": "VIP", "precio": 120, "disponibles": 100 },
+        { "tipo": "General", "precio": 45, "disponibles": 500 }
+    ],
+    "recinto": "6745a1b2c3d4e5f6a7b8c9d0"
+}
+
+### 11. GET /eventos - Listar todos los eventos
+GET {{baseUrl}}/eventos
+
+### 12. GET /eventos/:id - Buscar evento por id (cambiar el id)
+GET {{baseUrl}}/eventos/6745a1b2c3d4e5f6a7b8c9d0
+
+### 13. GET /eventos/:id - Buscar evento con id inválido
+GET {{baseUrl}}/eventos/idInvalido
+
+### 14. GET /eventos/localidad/:nombre - Eventos por localidad
+GET {{baseUrl}}/eventos/localidad/Madrid
+
+### 15. GET /eventos/localidad/:nombre - Localidad sin eventos
+GET {{baseUrl}}/eventos/localidad/Inexistente
+
+### 16. PUT /eventos/:id - Actualizar evento (cambiar el id)
+PUT {{baseUrl}}/eventos/6745a1b2c3d4e5f6a7b8c9d0
+content-type: application/json
+
+{
+    "nombre": "Concierto de Rock Actualizado"
+}
+
+### 17. DELETE /eventos/:id - Eliminar evento (cambiar el id)
+DELETE {{baseUrl}}/eventos/6745a1b2c3d4e5f6a7b8c9d0
+
+### 18. GET /eventos/entradas/:idEvento/:tipoEntrada - Consultar entradas VIP (cambiar el id)
+GET {{baseUrl}}/eventos/entradas/6745a1b2c3d4e5f6a7b8c9d0/VIP
+
+### 19. GET /eventos/entradas/:idEvento/:tipoEntrada - Tipo inexistente (cambiar el id)
+GET {{baseUrl}}/eventos/entradas/6745a1b2c3d4e5f6a7b8c9d0/Platino
+
+### 20. PUT /eventos/entradas/:idEvento/:tipoEntrada/:cantidad - Comprar 5 entradas VIP (cambiar id)
+PUT {{baseUrl}}/eventos/entradas/6745a1b2c3d4e5f6a7b8c9d0/VIP/5
+
+### 21. PUT /eventos/entradas/:idEvento/:tipoEntrada/:cantidad - Cantidad excesiva (cambiar id)
+PUT {{baseUrl}}/eventos/entradas/6745a1b2c3d4e5f6a7b8c9d0/VIP/99999
+
